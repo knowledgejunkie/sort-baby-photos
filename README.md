@@ -52,7 +52,7 @@ On Debian/Ubuntu, the following should install the necessary dependencies:
 Usage
 -----
 
-To sort photos in a given directory into a new output directory structure,
+To sort photos in a given directory into a new output directory hierarchy,
 based on a given starting date:
 
     $ ./sort-baby-photos --input-dir=~/Unsorted_Photos --output-dir=~/Sorted_Photos --start-date=2015-12-07 [--symlink] [--debug]
@@ -62,7 +62,7 @@ based on a given starting date:
 - *--start-date* should be given in ISO 8601 format e.g. YYYY-MM-DD (date only)
   or YYYY-MM-DDThh:mm:ss (date and time).
 - If *--symlink* is specified sort-baby-photos will attempt to create symlinks
-  from the original photos to the output direectory hierarchy. By default,
+  from the original photos to the output directory hierarchy. By default,
   sort-baby-photos will move photos into the output directory hierarchy.
 - *--debug* will provide additional debugging output during processing.
 
