@@ -52,18 +52,28 @@ On Debian/Ubuntu, the following should install the necessary dependencies:
 Usage
 -----
 
-To sort photos in a given directory into a new output directory hierarchy,
-based on a given starting date:
+To sort photos in a given input directory into a new output directory hierarchy,
+based on a given starting date (e.g. 2015-12-07), run:
 
-    $ ./sort-baby-photos --input-dir=~/Unsorted_Photos --output-dir=~/Sorted_Photos --start-date=2015-12-07 [--symlink] [--debug]
+    $ ./sort-baby-photos --input-dir=~/Unsorted_Photos --output-dir=~/Sorted_Photos --start-date=2015-12-07 [--date-prefix] [--move | --symlink] [--debug]
 
-- *--input-dir* and *--output-dir* paths can be given in relative or absolute
-  format. All paths are converted to absolute paths internally.
+modifying imput and output directories as necessary.
+
+- *--input-dir* and *--output-dir* can be given as either relative or absolute
+  paths. All paths are converted to absolute paths internally.
 - *--start-date* should be given in ISO 8601 format e.g. YYYY-MM-DD (date only)
   or YYYY-MM-DDThh:mm:ss (date and time).
-- If *--symlink* is specified sort-baby-photos will attempt to create symlinks
-  from the original photos to the output directory hierarchy. By default,
-  sort-baby-photos will move photos into the output directory hierarchy.
+- If *--date-prefix* is specified sort-baby-photos will prepend a timestamp
+  (currently seconds since the Unix epoch) to each filename when moving or
+  creating a symlink.  This allows natural sorting of files in the output
+  directory hierarchy based on the date the photo was taken, rather than the
+  original filename of the photo, and should help ensure photos are listed in
+  chronological order within each output directory.
+- If *--move* is specified sort-baby-photos will move photos from the input
+  directory to the output directory hierarchy. This is the default behaviour if
+  neither *--move* nor *--symlink* options are given.
+- If *--symlink* is specified sort-baby-photos will create a symlink from the
+  input directory to the output directory hierarchy for each processed image.
 - *--debug* will provide additional debugging output during processing.
 
 License
