@@ -55,7 +55,7 @@ Usage
 To sort photos in a given input directory into a new output directory hierarchy,
 based on a given starting date (e.g. 2015-12-07), run:
 
-    $ ./sort-baby-photos --input-dir=~/Unsorted_Photos --output-dir=~/Sorted_Photos --start-date=2015-12-07 [--date-prefix] [--move | --symlink] [--debug]
+    $ ./sort-baby-photos --input-dir=~/Unsorted_Photos --output-dir=~/Sorted_Photos --start-date=2015-12-07 [--date-prefix] [--recursive] [--move | --symlink] [--debug]
 
 modifying imput and output directories as necessary.
 
@@ -69,12 +69,24 @@ modifying imput and output directories as necessary.
   directory hierarchy based on the date the photo was taken, rather than the
   original filename of the photo, and should help ensure photos are listed in
   chronological order within each output directory.
+- If *--recursive* is specified, sort-baby-photos will search for all photos
+  available in the given input directory and additionally in any directories
+  within the input directory. By default, only photos found in the input
+  directory itself are processed.
 - If *--move* is specified sort-baby-photos will move photos from the input
   directory to the output directory hierarchy. This is the default behaviour if
   neither *--move* nor *--symlink* options are given.
 - If *--symlink* is specified sort-baby-photos will create a symlink from the
   input directory to the output directory hierarchy for each processed image.
 - *--debug* will provide additional debugging output during processing.
+
+TODO
+----
+
+- Short and long options
+- Check for duplicate images in output directories?
+- Move images to output directories and symlink them back into input directory
+  with initial filename?
 
 License
 -------
