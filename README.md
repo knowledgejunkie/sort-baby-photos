@@ -5,36 +5,47 @@ sort-baby-photos
 Status
 ------
 
-sort-baby-photos is a work in progress.
+sort-baby-photos is a work in progress nearing completion.
 
 
 Introduction
 ------------
 
-sort-baby-photos is a script that organises your baby (or any other) photos. It
-is written in Perl.
+sort-baby-photos organises your baby photos into nested directories for each
+month since birth. This makes using sort-baby-photos ideal for choosing photos
+for regular photobooks.
 
-sort-baby-photos organises your photos into a directory hierarchy with naming
-relative to a given start date (e.g. "~/Sorted/00y/03m", "~/Sorted/02y/11m").
-For organising baby photos, this date will usually be the baby's date of birth.
+sort-baby-photos organises photos into an output directory hierarchy with
+directory naming relative to a specified start date.  For organising baby
+photos, this date will usually be the baby's date of birth.
 
-sort-baby-photos extracts the Exif data from each photo it processes to determine
-when it was taken (via the DateTimeOriginal tag).
+Under the top-level output directory, the first level of sub-directories
+represent the age of the baby in years (e.g. ./01y).
 
-Unlike other great photo management tools such as
-[SortPhotos](https://github.com/andrewning/sortphotos) that organise your
-photos into directories with naming based on the date the photo was taken (e.g.
+Each of these 'year' sub-directories may contain up to 12 'month'
+sub-directories (00m-11m), which are where the photos are located after
+processing.
+
+So, a top-level output directory containing the path ./01y/06m will contain all
+photos processed that were taken at least 1 year and 6 months and less than
+1 year and 7 months after the specified start (birth) date
+
+sort-baby-photos extracts Exif metadata from each photo it processes to
+determine when it was taken (via the DateTimeOriginal tag).
+
+Unlike other photo management tools such as
+[SortPhotos](https://github.com/andrewning/sortphotos) that organise photos
+into directories with naming based on the date the *photo* was taken (e.g.
 year/month or year/month/day), the use of a directory hierarchy based on your
-baby's "age" makes it very easy to quickly see all photos taken in each month
-(or year, etc) since birth.
+*baby's age* makes it very easy to quickly see all photos taken in each
+non-calendar month (or year, etc) since birth.
 
-This makes using sort-baby-photos ideal for choosing photos for photobooks.
 
 
 Prerequisites
 -------------
 
-sort-baby-photos uses the following non-core Perl modules:
+sort-baby-photos uses a few popular non-core Perl modules:
 
 - DateTime
 - DateTime::Duration
@@ -55,7 +66,7 @@ Usage
 To sort photos in a given input directory into a new output directory hierarchy,
 based on a given starting date (e.g. 2015-12-07), run:
 
-    $ ./sort-baby-photos --input-dir=~/Unsorted_Photos --output-dir=~/Sorted_Photos --start-date=2015-12-07 [--date-prefix] [--recursive] [--move | --symlink] [--debug]
+    $ ./sort-baby-photos --input-dir=~/Unsorted_Photos --output-dir=~/Sorted_Photos --start-date=2015-12-07 [--date-prefix] [--recursive] [--move | --symlink]
 
 modifying imput and output directories as necessary.
 
@@ -77,20 +88,31 @@ modifying imput and output directories as necessary.
   directory to the output directory hierarchy. This is the default behaviour if
   neither *--move* nor *--symlink* options are given.
 - If *--symlink* is specified sort-baby-photos will create a symlink from the
-  input directory to the output directory hierarchy for each processed image.
-- *--debug* will provide additional debugging output during processing.
+  input directory to the output directory hierarchy for each processed photo.
+- *--quiet* will not print progress messages during processing.
+- *--verbose* will provide additional progress messages during processing.
+- *--help* will print an informative help message
+- *--man* will print the full manual
+- *--version* will print the current version
+
+Note that both short and long option names are supported - please read the help
+or manual page for full details.
+
 
 TODO
 ----
 
-- Short and long options
-- Check for duplicate images in output directories?
-- Move images to output directories and symlink them back into input directory
-  with initial filename?
+- Check for duplicate files in output directories
+- Decide on default move/symlink behaviour
+- File manager before/after screenshot
+
+- Do we need a *--copy* option?
+- Move and rename files to output directories and symlink them back into input
+  directory with original filename?
 
 License
 -------
 
-Copyright (c) Nick Morrott
+Copyright (c) Nick Morrott 2015
 
 Licensed under the [GNU GPL v2 or later](http://www.gnu.org/licenses/gpl.html).
